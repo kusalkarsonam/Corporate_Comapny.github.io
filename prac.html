@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prac</title>
+    <script src="https://kit.fontawesome.com/400f649c3f.js" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto:500,700);
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+
+.container-list {
+  float: left;
+  max-width: 277px;
+  margin: 0 auto;
+  border-top: 5px solid #435757;
+  background-color: rgba(255, 255, 255, .2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+  user-select: none;
+}
+.container-right {
+  max-width: 277px;
+  margin: 0 auto;
+
+}
+
+
+
+.items {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  counter-reset: done-items undone-items;
+}
+
+h2 {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 16px;
+
+    clear: both;
+    color: #282c3f;
+    display: block;
+    font-family: Whitney,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+h2::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: -20px;
+  width: 5px;
+  background-color: #435757;
+}
+
+h2::after {
+  display: block;
+  float: right;
+  font-weight: normal;
+}
+
+.done {
+  order: 1;
+}
+
+.done::after {
+  content: ' (' counter(done-items) ')';
+}
+
+.undone {
+  order: 3;
+}
+
+.undone::after {
+  content: ' (' counter(undone-items) ')';
+}
+
+
+.left-header{
+  font-weight: 500;
+            text-transform: uppercase;
+            font-size: 20px;
+            margin: 0 0 18px;
+            text-align: center;
+            clear: both;
+            color: #7b7c84;
+            display: block;
+            font-family: Whitney,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.left-list{
+  display: block;
+    width: 95%;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 17px;
+    color: #282c3f;
+    font-family: Whitney,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+#left-sub-header{
+  font-weight: 500;
+            text-transform: uppercase;
+            font-size: 18px;
+            margin: 0 0 18px;
+            clear: both;
+            color: #ff3f6c;;
+            display: block;
+            font-family: Whitney,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* hide inputs offscreen, but at the same vertical positions as the correpsonding labels, so that tabbing scrolls the viewport as expected */
+input {
+  display: block;
+  height: 53px;
+  margin: 0 0 -53px -9999px;
+  order: 4;
+  outline: none;
+  counter-increment: undone-items;
+}
+
+input:checked {
+  order: 2;
+  counter-increment: done-items;  
+}
+
+label {
+  display: block;
+  position: relative;
+  padding: 15px 0 15px 45px;
+  border-top: 1px dashed #fff;
+  order: 4;
+  cursor: pointer;
+  animation: undone .5s;
+}
+
+label::before {
+  content: '\f10c'; /* circle outline */
+  display: block;
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  font: 1.5em 'FontAwesome';
+}
+
+label:hover, input:focus + label {
+  background-color: rgba(255, 255, 255, .2);
+}
+
+input:checked + label {
+  order: 2;
+  animation: done .5s;
+}
+
+input:checked + label::before {
+  content: '\f058'; /* circle checkmark */
+}
+
+@keyframes done {
+  0% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, .4);
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, .4);
+  }
+}
+
+@keyframes undone {
+  0% {
+    opacity: 0;
+    background-color: rgba(255, 255, 255, .4);
+    transform: translateY(-20px);
+  }
+  50% {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, .4);
+  }
+}
+
+/* .product-brand{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #282c3f;
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: inherit;
+    -webkit-margin-before: initial;
+    margin-block-start: 0;
+} */
+.product-details{
+    position: relative;
+    height: 155px;
+    display: flex;
+    background: #fff;
+    border-radius: 20px;
+  
+    transition: 0.5s;
+    justify-content: center;
+}
+
+.product-details:hover{
+  box-shadow: 0 35px 80px rgb(0 0 0 / 15%);
+}
+
+
+
+
+
+.search-base h4, .search-base ul, .search-rightContainer {
+    padding-left: 0;
+}
+
+.results-base {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+   
+    width: 100%;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.product-base {
+    width: 210px;
+    text-align: left;
+    position: relative;
+    vertical-align: top;
+
+    overflow: hidden;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+
+}
+
+@media (min-width: 768px){
+.col-md-3 {
+    flex: 0 0 auto;
+    width: 21%;
+}
+}
+
+.product-base:hover{
+  box-shadow: 0 35px 80px rgb(0 0 0 / 15%);
+}
+
+
+.product-productMetaInfo {
+    position: relative;
+    z-index: 3;
+    background: #fff;
+    padding: 0 10px;
+    height: 100%;
+    margin-top: 12px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+*, :after, :before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+h3.product-brand {
+    margin-top: inherit;
+    -webkit-margin-before: initial;
+    margin-block-start: 0;
+}
+
+.product-brand {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1;
+    color: #282c3f;
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.product-product {
+    color: #535766;
+    font-size: 14px;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    display: block;
+}
+.product-sizes {
+    font-size: 14px;
+    color: #535665;
+    line-height: 1;
+    display: none;
+    margin-top: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0;
+    margin-bottom: 0;
+    font-weight: 400;
+
+
+}
+
+.product-discountedPrice, .product-price {
+    font-size: 14px;
+    color: #282c3f;
+    font-weight: 500;
+}
+
+.product-price {
+    line-height: 15px;
+    margin: 10px 0 6px;
+    white-space: nowrap;
+}
+
+.product-strike {
+    text-decoration: line-through;
+    color: #7e818c;
+    font-weight: 400;
+    margin-left: 5px;
+    font-size: 12px;
+}
+.product-discountPercentage {
+    color: #ff905a;
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: 5px;
+}
+.header-product-size{
+  font-size: 14px;
+    color: #282c3f;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.size{
+    color: #7e818c;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+button {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    background: none;
+    border-style: initial;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #ff3d60;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+ button:focus {
+	 outline: none;
+}
+ button:hover {
+	 box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
+}
+ button.liked {
+	 border-color: #ff8299;
+	 animation: shadow-grow 2s;
+}
+ button.liked svg {
+	 animation: heart-grow 0.7s;
+}
+ button.liked .heart {
+	 fill: #ff8299;
+}
+ button svg {
+	 width: 20px;
+	 height: auto;
+}
+ button svg .heart {
+	 fill: rgba(0, 0, 0, 0.15);
+}
+ button svg .shine {
+	 fill: #fff;
+}
+ @keyframes shadow-grow {
+	 0% {
+		 box-shadow: 0 0;
+	}
+	 50% {
+		 box-shadow: 0 0 5px 20px rgba(255, 255, 255, 0);
+	}
+	 100% {
+		 box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+	}
+}
+ @keyframes heart-grow {
+	 0% {
+		 transform: scale(3);
+		 opacity: 0;
+	}
+	 50% {
+		 opacity: 1;
+	}
+	 100% {
+		 transform: scale(1);
+	}
+}
+ 
+
+.wlist:hover{
+  box-shadow: 10 10 80px rgba(163, 32, 32, 0.1);
+}
+
+.wlist{
+    border: 1px solid grey;
+    width: 72%;
+    padding: 4px 9px 0px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 10 10 80px rgba(163, 32, 32, 0.1);
+}
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+<div class="right-cont">    
+<div class="col-md-7">
+
+          <ul class="results-base">
+            
+            <div class="col-md-2">
+                <li class="product-base">
+                    <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/14709966/2021/7/10/d2407657-1f04-4d13-9f52-9e134050489b1625905793495-Nayo-Women-Red-Ethnic-Motifs-Printed-Empire-Pure-Cotton-Kurt-1.jpg" 
+                    alt="d-1" style="width: 100%;" >
+                    <div class="product-details">
+                      <div class="product-content">   
+                          <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                          <h4 class="product-product">Women Kurta With Dupatta</h4>
+                          <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                            <span class="product-sizeNoInventoryPresent">XS, </span>
+                            <span class="product-sizeNoInventoryPresent">S, </span>
+                            <span class="product-sizeNoInventoryPresent">M, </span>
+                            <span class="product-sizeNoInventoryPresent">L, </span>
+                            <span class="product-sizeNoInventoryPresent">XL, </span>
+                            <span class="product-sizeNoInventoryPresent">XXL, </span>
+                            <span class="product-sizeNoInventoryPresent">3XL, </span>
+                            <span class="product-sizeNoInventoryPresent">4XL</span>
+                          </h4>
+                          <div class="product-price">
+                            <span>
+                              <span class="product-discountedPrice">
+                                <!-- react-text: 17546 -->Rs. 
+                                <!-- /react-text --><!-- react-text: 17547 -->
+                                974<!-- /react-text --></span>
+                              <span class="product-strike">
+                                <!-- react-text: 17549 -->Rs.
+                                 <!-- /react-text --><!-- react-text: 17550 -->
+                                 3748<!-- /react-text -->
+                              </span>
+                            </span>
+                            <span class="product-discountPercentage">(74% OFF)</span>
+                            <div class="product-size"> 
+                              <h3 class="header-product-size">Sizes
+                              <span class="size">S,M,L,XL,XXL</span></h3>
+                            </div>
+
+
+                            <div class="wlist">
+                                    <a href="" style="text-decoration: none; color:black;">
+                                        <h6 class="wlist-header">WISHLIST</h6></a>
+                            </div>
+
+
+                            <button aria-label="Favourite" style="    margin-left: 131px;
+                            margin-top: -40px;">
+                              <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                              <metadata>
+                              <rdf:RDF>
+                              <cc:Work rdf:about="">
+                              <dc:format>image/svg+xml</dc:format>
+                              <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                              </cc:Work>
+                              </rdf:RDF>
+                              </metadata>
+                              <defs>
+                              <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                              <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                              </defs>
+                              <g transform="translate(1.9963 -15.98)">
+                              <use width="100%" height="100%" xlink:href="#b"/>
+                              <use width="100%" height="100%" xlink:href="#a"/>
+                              </g>
+                              </svg>
+                              </button>
+
+                            
+                          </div>              
+                      </div>
+                </li>
+            </div>
+         
+
+            <div class="col-md-2">
+              <li class="product-base">
+                  <img src=" https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/18551726/2022/6/2/6c697d97-b7e7-41bd-adb3-0bc196c9b1581654153291170POONAMDESIGNERWomenLimeGreenHighSlitPureCottonKurtiwithTrous1.jpg" 
+                  alt="d-1" style="width: 100%;" >
+                  <div class="product-details">
+                    <div class="product-content">   
+                        <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                        <h4 class="product-product">Women Kurta With Dupatta</h4>
+                        <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                          <span class="product-sizeNoInventoryPresent">XS, </span>
+                          <span class="product-sizeNoInventoryPresent">S, </span>
+                          <span class="product-sizeNoInventoryPresent">M, </span>
+                          <span class="product-sizeNoInventoryPresent">L, </span>
+                          <span class="product-sizeNoInventoryPresent">XL, </span>
+                          <span class="product-sizeNoInventoryPresent">XXL, </span>
+                          <span class="product-sizeNoInventoryPresent">3XL, </span>
+                          <span class="product-sizeNoInventoryPresent">4XL</span>
+                        </h4>
+                        <div class="product-price">
+                          <span>
+                            <span class="product-discountedPrice">
+                              <!-- react-text: 17546 -->Rs. 
+                              <!-- /react-text --><!-- react-text: 17547 -->
+                              974<!-- /react-text --></span>
+                            <span class="product-strike">
+                              <!-- react-text: 17549 -->Rs.
+                               <!-- /react-text --><!-- react-text: 17550 -->
+                               3748<!-- /react-text -->
+                            </span>
+                          </span>
+                          <span class="product-discountPercentage">(74% OFF)</span>
+                          <div class="product-size"> 
+                            <h3 class="header-product-size">Sizes
+                            <span class="size">S,M,L,XL,XXL</span></h3>
+                          </div>
+
+
+                          <div class="wlist">
+                                  <a href="" style="text-decoration: none; color:black;">
+                                      <h6 class="wlist-header">WISHLIST</h6></a>
+                          </div>
+
+
+                          <button aria-label="Favourite" style="    margin-left: 131px;
+                          margin-top: -40px;">
+                            <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <metadata>
+                            <rdf:RDF>
+                            <cc:Work rdf:about="">
+                            <dc:format>image/svg+xml</dc:format>
+                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                            </cc:Work>
+                            </rdf:RDF>
+                            </metadata>
+                            <defs>
+                            <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                            <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                            </defs>
+                            <g transform="translate(1.9963 -15.98)">
+                            <use width="100%" height="100%" xlink:href="#b"/>
+                            <use width="100%" height="100%" xlink:href="#a"/>
+                            </g>
+                            </svg>
+                            </button>
+
+                          
+                        </div>              
+                    </div>
+              </li>
+          </div>
+       
+
+          <div class="col-md-2">
+            <li class="product-base">
+                <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/16331376/2021/12/2/b8c4f90f-683c-48d2-b8ac-19891a87c0651638428628378KurtaSets1.jpg" 
+                alt="d-1" style="width: 100%;" >
+                <div class="product-details">
+                  <div class="product-content">   
+                      <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                      <h4 class="product-product">Women Kurta With Dupatta</h4>
+                      <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                        <span class="product-sizeNoInventoryPresent">XS, </span>
+                        <span class="product-sizeNoInventoryPresent">S, </span>
+                        <span class="product-sizeNoInventoryPresent">M, </span>
+                        <span class="product-sizeNoInventoryPresent">L, </span>
+                        <span class="product-sizeNoInventoryPresent">XL, </span>
+                        <span class="product-sizeNoInventoryPresent">XXL, </span>
+                        <span class="product-sizeNoInventoryPresent">3XL, </span>
+                        <span class="product-sizeNoInventoryPresent">4XL</span>
+                      </h4>
+                      <div class="product-price">
+                        <span>
+                          <span class="product-discountedPrice">
+                            <!-- react-text: 17546 -->Rs. 
+                            <!-- /react-text --><!-- react-text: 17547 -->
+                            974<!-- /react-text --></span>
+                          <span class="product-strike">
+                            <!-- react-text: 17549 -->Rs.
+                             <!-- /react-text --><!-- react-text: 17550 -->
+                             3748<!-- /react-text -->
+                          </span>
+                        </span>
+                        <span class="product-discountPercentage">(74% OFF)</span>
+                        <div class="product-size"> 
+                          <h3 class="header-product-size">Sizes
+                          <span class="size">S,M,L,XL,XXL</span></h3>
+                        </div>
+
+
+                        <div class="wlist">
+                                <a href="" style="text-decoration: none; color:black;">
+                                    <h6 class="wlist-header">WISHLIST</h6></a>
+                        </div>
+
+
+                        <button aria-label="Favourite" style="    margin-left: 131px;
+                        margin-top: -40px;">
+                          <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <metadata>
+                          <rdf:RDF>
+                          <cc:Work rdf:about="">
+                          <dc:format>image/svg+xml</dc:format>
+                          <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                          </cc:Work>
+                          </rdf:RDF>
+                          </metadata>
+                          <defs>
+                          <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                          <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                          </defs>
+                          <g transform="translate(1.9963 -15.98)">
+                          <use width="100%" height="100%" xlink:href="#b"/>
+                          <use width="100%" height="100%" xlink:href="#a"/>
+                          </g>
+                          </svg>
+                          </button>
+
+                        
+                      </div>              
+                  </div>
+            </li>
+        </div>
+
+        <div class="col-md-2">
+          <li class="product-base">
+              <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/16524740/2021/12/29/17ab2ac8-2e60-422d-9d20-2527415932361640754214931-STRAPPY-SET-IN-ORANGE-WITH-ORGANZA-DUPATTA-5961640754214349-2.jpg" 
+              alt="d-1" style="width: 100%;" >
+              <div class="product-details">
+                <div class="product-content">   
+                    <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                    <h4 class="product-product">Women Kurta With Dupatta</h4>
+                    <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                      <span class="product-sizeNoInventoryPresent">XS, </span>
+                      <span class="product-sizeNoInventoryPresent">S, </span>
+                      <span class="product-sizeNoInventoryPresent">M, </span>
+                      <span class="product-sizeNoInventoryPresent">L, </span>
+                      <span class="product-sizeNoInventoryPresent">XL, </span>
+                      <span class="product-sizeNoInventoryPresent">XXL, </span>
+                      <span class="product-sizeNoInventoryPresent">3XL, </span>
+                      <span class="product-sizeNoInventoryPresent">4XL</span>
+                    </h4>
+                    <div class="product-price">
+                      <span>
+                        <span class="product-discountedPrice">
+                          <!-- react-text: 17546 -->Rs. 
+                          <!-- /react-text --><!-- react-text: 17547 -->
+                          974<!-- /react-text --></span>
+                        <span class="product-strike">
+                          <!-- react-text: 17549 -->Rs.
+                           <!-- /react-text --><!-- react-text: 17550 -->
+                           3748<!-- /react-text -->
+                        </span>
+                      </span>
+                      <span class="product-discountPercentage">(74% OFF)</span>
+                      <div class="product-size"> 
+                        <h3 class="header-product-size">Sizes
+                        <span class="size">S,M,L,XL,XXL</span></h3>
+                      </div>
+
+
+                      <div class="wlist">
+                              <a href="" style="text-decoration: none; color:black;">
+                                  <h6 class="wlist-header">WISHLIST</h6></a>
+                      </div>
+
+
+                      <button aria-label="Favourite" style="    margin-left: 131px;
+                      margin-top: -40px;">
+                        <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <metadata>
+                        <rdf:RDF>
+                        <cc:Work rdf:about="">
+                        <dc:format>image/svg+xml</dc:format>
+                        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                        </cc:Work>
+                        </rdf:RDF>
+                        </metadata>
+                        <defs>
+                        <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                        <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                        </defs>
+                        <g transform="translate(1.9963 -15.98)">
+                        <use width="100%" height="100%" xlink:href="#b"/>
+                        <use width="100%" height="100%" xlink:href="#a"/>
+                        </g>
+                        </svg>
+                        </button>
+
+                      
+                    </div>              
+                </div>
+          </li>
+      </div>
+     
+
+
+
+
+
+
+      <div class="col-md-12">
+
+
+        <ul class="results-base">
+          
+          <div class="col-md-2">
+              <li class="product-base">
+                  <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/17062988/2022/2/5/f864acf1-f5b1-423e-9e43-137b0f588ebf1644056622967KALINIWomenMaroonEmbroideredPleatedKurtawithSharara1.jpg" 
+                  alt="d-1" style="width: 100%;" >
+                  <div class="product-details">
+                    <div class="product-content">   
+                        <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                        <h4 class="product-product">Women Kurta With Dupatta</h4>
+                        <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                          <span class="product-sizeNoInventoryPresent">XS, </span>
+                          <span class="product-sizeNoInventoryPresent">S, </span>
+                          <span class="product-sizeNoInventoryPresent">M, </span>
+                          <span class="product-sizeNoInventoryPresent">L, </span>
+                          <span class="product-sizeNoInventoryPresent">XL, </span>
+                          <span class="product-sizeNoInventoryPresent">XXL, </span>
+                          <span class="product-sizeNoInventoryPresent">3XL, </span>
+                          <span class="product-sizeNoInventoryPresent">4XL</span>
+                        </h4>
+                        <div class="product-price">
+                          <span>
+                            <span class="product-discountedPrice">
+                              <!-- react-text: 17546 -->Rs. 
+                              <!-- /react-text --><!-- react-text: 17547 -->
+                              974<!-- /react-text --></span>
+                            <span class="product-strike">
+                              <!-- react-text: 17549 -->Rs.
+                               <!-- /react-text --><!-- react-text: 17550 -->
+                               3748<!-- /react-text -->
+                            </span>
+                          </span>
+                          <span class="product-discountPercentage">(74% OFF)</span>
+                          <div class="product-size"> 
+                            <h3 class="header-product-size">Sizes
+                            <span class="size">S,M,L,XL,XXL</span></h3>
+                          </div>
+
+
+                          <div class="wlist">
+                                  <a href="" style="text-decoration: none; color:black;">
+                                      <h6 class="wlist-header">WISHLIST</h6></a>
+                          </div>
+
+
+                          <button aria-label="Favourite" style="    margin-left: 131px;
+                          margin-top: -40px;">
+                            <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <metadata>
+                            <rdf:RDF>
+                            <cc:Work rdf:about="">
+                            <dc:format>image/svg+xml</dc:format>
+                            <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                            </cc:Work>
+                            </rdf:RDF>
+                            </metadata>
+                            <defs>
+                            <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                            <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                            </defs>
+                            <g transform="translate(1.9963 -15.98)">
+                            <use width="100%" height="100%" xlink:href="#b"/>
+                            <use width="100%" height="100%" xlink:href="#a"/>
+                            </g>
+                            </svg>
+                            </button>
+
+                          
+                        </div>              
+                    </div>
+              </li>
+          </div>
+       
+
+          <div class="col-md-2">
+            <li class="product-base">
+                <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/16589834/2022/2/10/fb73f692-7a4b-4641-8609-6bcc48ebdf891644495002266-Women-Peach-Printed-with-yoke-neck-Pleated-Kaftan-Kurta-with-1.jpg" 
+                alt="d-1" style="width: 100%;" >
+                <div class="product-details">
+                  <div class="product-content">   
+                      <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                      <h4 class="product-product">Women Kurta With Dupatta</h4>
+                      <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                        <span class="product-sizeNoInventoryPresent">XS, </span>
+                        <span class="product-sizeNoInventoryPresent">S, </span>
+                        <span class="product-sizeNoInventoryPresent">M, </span>
+                        <span class="product-sizeNoInventoryPresent">L, </span>
+                        <span class="product-sizeNoInventoryPresent">XL, </span>
+                        <span class="product-sizeNoInventoryPresent">XXL, </span>
+                        <span class="product-sizeNoInventoryPresent">3XL, </span>
+                        <span class="product-sizeNoInventoryPresent">4XL</span>
+                      </h4>
+                      <div class="product-price">
+                        <span>
+                          <span class="product-discountedPrice">
+                            <!-- react-text: 17546 -->Rs. 
+                            <!-- /react-text --><!-- react-text: 17547 -->
+                            974<!-- /react-text --></span>
+                          <span class="product-strike">
+                            <!-- react-text: 17549 -->Rs.
+                             <!-- /react-text --><!-- react-text: 17550 -->
+                             3748<!-- /react-text -->
+                          </span>
+                        </span>
+                        <span class="product-discountPercentage">(74% OFF)</span>
+                        <div class="product-size"> 
+                          <h3 class="header-product-size">Sizes
+                          <span class="size">S,M,L,XL,XXL</span></h3>
+                        </div>
+
+
+                        <div class="wlist">
+                                <a href="" style="text-decoration: none; color:black;">
+                                    <h6 class="wlist-header">WISHLIST</h6></a>
+                        </div>
+
+
+                        <button aria-label="Favourite" style="    margin-left: 131px;
+                        margin-top: -40px;">
+                          <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                          <metadata>
+                          <rdf:RDF>
+                          <cc:Work rdf:about="">
+                          <dc:format>image/svg+xml</dc:format>
+                          <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                          </cc:Work>
+                          </rdf:RDF>
+                          </metadata>
+                          <defs>
+                          <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                          <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                          </defs>
+                          <g transform="translate(1.9963 -15.98)">
+                          <use width="100%" height="100%" xlink:href="#b"/>
+                          <use width="100%" height="100%" xlink:href="#a"/>
+                          </g>
+                          </svg>
+                          </button>
+
+                        
+                      </div>              
+                  </div>
+            </li>
+        </div>
+     
+
+        <div class="col-md-2">
+          <li class="product-base">
+              <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/productimage/2021/7/1/4d32fc94-bf2f-4af8-bc57-dc0d9729ecd11625127236995-1.jpg" 
+              alt="d-1" style="width: 100%;" >
+              <div class="product-details">
+                <div class="product-content">   
+                    <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                    <h4 class="product-product">Women Kurta With Dupatta</h4>
+                    <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                      <span class="product-sizeNoInventoryPresent">XS, </span>
+                      <span class="product-sizeNoInventoryPresent">S, </span>
+                      <span class="product-sizeNoInventoryPresent">M, </span>
+                      <span class="product-sizeNoInventoryPresent">L, </span>
+                      <span class="product-sizeNoInventoryPresent">XL, </span>
+                      <span class="product-sizeNoInventoryPresent">XXL, </span>
+                      <span class="product-sizeNoInventoryPresent">3XL, </span>
+                      <span class="product-sizeNoInventoryPresent">4XL</span>
+                    </h4>
+                    <div class="product-price">
+                      <span>
+                        <span class="product-discountedPrice">
+                          <!-- react-text: 17546 -->Rs. 
+                          <!-- /react-text --><!-- react-text: 17547 -->
+                          974<!-- /react-text --></span>
+                        <span class="product-strike">
+                          <!-- react-text: 17549 -->Rs.
+                           <!-- /react-text --><!-- react-text: 17550 -->
+                           3748<!-- /react-text -->
+                        </span>
+                      </span>
+                      <span class="product-discountPercentage">(74% OFF)</span>
+                      <div class="product-size"> 
+                        <h3 class="header-product-size">Sizes
+                        <span class="size">S,M,L,XL,XXL</span></h3>
+                      </div>
+
+
+                      <div class="wlist">
+                              <a href="" style="text-decoration: none; color:black;">
+                                  <h6 class="wlist-header">WISHLIST</h6></a>
+                      </div>
+
+
+                      <button aria-label="Favourite" style="    margin-left: 131px;
+                      margin-top: -40px;">
+                        <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <metadata>
+                        <rdf:RDF>
+                        <cc:Work rdf:about="">
+                        <dc:format>image/svg+xml</dc:format>
+                        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                        </cc:Work>
+                        </rdf:RDF>
+                        </metadata>
+                        <defs>
+                        <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                        <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                        </defs>
+                        <g transform="translate(1.9963 -15.98)">
+                        <use width="100%" height="100%" xlink:href="#b"/>
+                        <use width="100%" height="100%" xlink:href="#a"/>
+                        </g>
+                        </svg>
+                        </button>
+
+                      
+                    </div>              
+                </div>
+          </li>
+      </div>
+
+      <div class="col-md-2">
+        <li class="product-base">
+            <img src="https://assets.myntassets.com/f_webp,dpr_1.0,q_60,w_210,c_limit,fl_progressive/assets/images/14951330/2022/2/16/e6b90907-a613-45e1-9b2e-988caaba36581645010770505-Ahalyaa-Women-Beige-Floral-Printed-Regular-Gotta-Patti-Kurta-1.jpg" 
+            alt="d-1" style="width: 100%;" >
+            <div class="product-details">
+              <div class="product-content">   
+                  <h3 class="product-brand" style="text-align: center;">AHIKA</h3>
+                  <h4 class="product-product">Women Kurta With Dupatta</h4>
+                  <h4 class="product-sizes"><!-- react-text: 17534 -->Sizes: <!-- /react-text -->
+                    <span class="product-sizeNoInventoryPresent">XS, </span>
+                    <span class="product-sizeNoInventoryPresent">S, </span>
+                    <span class="product-sizeNoInventoryPresent">M, </span>
+                    <span class="product-sizeNoInventoryPresent">L, </span>
+                    <span class="product-sizeNoInventoryPresent">XL, </span>
+                    <span class="product-sizeNoInventoryPresent">XXL, </span>
+                    <span class="product-sizeNoInventoryPresent">3XL, </span>
+                    <span class="product-sizeNoInventoryPresent">4XL</span>
+                  </h4>
+                  <div class="product-price">
+                    <span>
+                      <span class="product-discountedPrice">
+                        <!-- react-text: 17546 -->Rs. 
+                        <!-- /react-text --><!-- react-text: 17547 -->
+                        974<!-- /react-text --></span>
+                      <span class="product-strike">
+                        <!-- react-text: 17549 -->Rs.
+                         <!-- /react-text --><!-- react-text: 17550 -->
+                         3748<!-- /react-text -->
+                      </span>
+                    </span>
+                    <span class="product-discountPercentage">(74% OFF)</span>
+                    <div class="product-size"> 
+                      <h3 class="header-product-size">Sizes
+                      <span class="size">S,M,L,XL,XXL</span></h3>
+                    </div>
+
+
+                    <div class="wlist">
+                            <a href="" style="text-decoration: none; color:black;">
+                                <h6 class="wlist-header">WISHLIST</h6></a>
+                    </div>
+
+
+                    <button aria-label="Favourite" style="    margin-left: 131px;
+                    margin-top: -40px;">
+                      <svg width="515.99" height="480.73" version="1.1" viewBox="0 0 515.99347 480.73038" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <metadata>
+                      <rdf:RDF>
+                      <cc:Work rdf:about="">
+                      <dc:format>image/svg+xml</dc:format>
+                      <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                      </cc:Work>
+                      </rdf:RDF>
+                      </metadata>
+                      <defs>
+                      <path class="heart" id="b" d="m372.59 17.99c-48.54 0-92.99 26.12-118 67.99-24.79-42.41-67.41-68-115.18-68-72.86 0-131.09 59.68-138.55 141.94-0.59 3.63-3.02 22.76 4.35 53.94 10.61 44.98 35.13 85.89 70.89 118.29 11.89 10.79 71.34 64.75 178.37 161.87 108.86-97.12 169.34-151.07 181.43-161.86 35.76-32.41 60.28-73.31 70.89-118.3 7.37-31.17 4.94-50.3 4.36-53.93-7.47-82.26-65.69-141.94-138.56-141.94z"/>
+                      <path class="shine" id="a" d="m59.07 176.3c0 5.44 4.4 9.84 9.85 9.84 5.44 0 9.84-4.4 9.84-9.84 0-43.44 35.34-78.78 78.78-78.78 5.44 0 9.84-4.4 9.84-9.84 0-5.45-4.41-9.85-9.84-9.85-54.3 0-98.47 44.17-98.47 98.47z"/>
+                      </defs>
+                      <g transform="translate(1.9963 -15.98)">
+                      <use width="100%" height="100%" xlink:href="#b"/>
+                      <use width="100%" height="100%" xlink:href="#a"/>
+                      </g>
+                      </svg>
+                      </button>
+
+                    
+                  </div>              
+              </div>
+        </li>
+    </div>
+   
+
+
+
+
+
+
+        </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+          </ul>
+</div>
+
+
+
+
+  </ul>
+</div>
+
+
+
+
+
+
+
+</div>    YYYYYYY
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+	var button = document.getElementsByTagName("button")[0];
+	button.addEventListener("click", function(e) {
+		button.classList.toggle("liked");
+	});
+});
+
+</script>
+
+
+</body>
+</html>
